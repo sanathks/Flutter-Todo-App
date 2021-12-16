@@ -1,0 +1,1 @@
+const textSize = 35.0;
