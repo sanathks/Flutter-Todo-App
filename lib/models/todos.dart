@@ -3,73 +3,43 @@ import 'package:todo/models/todo.dart';
 
 class Todos extends ChangeNotifier {
    final List<Todo> _items = [
-     Todo("1", "title", false)
+     Todo("1", "title1", false),
+     Todo("2", "title2", false),
+     Todo("3", "title3", false),
+     Todo("4", "title4", false),
    ];
 
    final List<Todo> _completedItems = [];
 
-   int get todoCount => _items.length;
-   // int get todoCount => _items.where((item) => !item.isDone).length;
+  int get todoCount => _items.where((item) => !item.isDone).length;
 
    void add(Todo todo) {
      _items.add(todo);
      notifyListeners();
    }
 
-   void markAsDone(int index) {
+   void markAsDone(String id) {
+      Todo item = _items.where((element) => element.id == id).first;
+      int index = _items.indexOf(item);
      _items[index].isDone = true;
+      _items.removeAt(index);
      notifyListeners();
    }
 
-   void remove(int index) {
-     Todo item = _items[index];
+   void remove(String id) {
+     Todo item = _items.where((element) => element.id == id).first;
+     int index = _items.indexOf(item);
      _items.removeAt(index);
-     item.isDone = true;
-     _completedItems.add(item);
-     notifyListeners();
+     if (todoCount == 0) {
+       notifyListeners();
+     }
    }
 
    Todo get(int index) {
      return _items[index];
    }
 
+   List<Todo> getAll() {
+     return  _items.where((item) => !item.isDone).toList();
+   }
 }
-
-// List<Todo> todo = todosData
-//     .map((item) => Todo(item['id'].toString(), item['title'].toString(), true))
-//     .toList();
-//
-// var todosData = [
-//   {
-//     "id": 1,
-//     "title": "Buy fish from market",
-//   },
-//   {
-//     "id": 2,
-//     "title": "Send email to sandy",
-//   },
-//   {
-//     "id": 3,
-//     "title": "Pay utility bills",
-//   },
-//   {
-//     "id": 4,
-//     "title": "Car wash",
-//   },
-//   {
-//     "id": 5,
-//     "title": "Insurance renewals",
-//   },
-//   {
-//     "id": 6,
-//     "title": "Pay rent",
-//   },
-//   {
-//     "id": 7,
-//     "title": "Pick the Dinuya from school at 10.00 AM, Adding some more text to see the visual effect",
-//   },
-//   {
-//     "id": 8,
-//     "title": "Check tradelist",
-//   }
-// ];
