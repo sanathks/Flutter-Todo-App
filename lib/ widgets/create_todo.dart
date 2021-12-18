@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
+import 'package:todo/%20widgets/label_picker.dart';
+import 'package:todo/const/colors.dart';
 import 'package:todo/models/todo.dart';
 import 'package:todo/models/todos.dart';
 
-class CreateTodo extends StatelessWidget {
+class CreateTodo extends StatefulWidget {
   const CreateTodo({Key? key}) : super(key: key);
+
+  @override
+  State<CreateTodo> createState() => _CreateTodoState();
+}
+
+class _CreateTodoState extends State<CreateTodo> {
+  late Color? _label;
+  final textController = TextEditingController();
+
+
+  @override
+  void initState() {
+    _label = Colors.white;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +56,9 @@ class CreateTodo extends StatelessWidget {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * .8,
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: textController,
+                  decoration: const InputDecoration(
                       hintStyle: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 18
@@ -51,13 +70,36 @@ class CreateTodo extends StatelessWidget {
               ),
             ],
           ),
+          const Padding(
+            padding: EdgeInsets.only(left: 10, right: 10, top: 50),
+            child: Text("Label"),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            child: LabelPicker(
+                onSelectColor: (value) {
+                    setState(() {
+                      _label = value;
+                    });
+                },
+                availableColors: const [
+                  blue,
+                  green,
+                  red,
+                  yellow,
+                  purple,
+                  black,
+                  grey,
+                ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(50),
             child: ElevatedButton(
               child: const Text('Add todo'),
               onPressed: () {
                 Provider.of<Todos>(context, listen: false).add(
-                    Todo("id", "dsfsdsd", false)
+                    Todo(nanoid(10), textController.text, false, _label)
                 );
                 return Navigator.pop(context);
               },
@@ -67,5 +109,4 @@ class CreateTodo extends StatelessWidget {
       ),
     );
   }
-
 }

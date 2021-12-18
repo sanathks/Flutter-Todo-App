@@ -30,13 +30,13 @@ class _DashboardState extends State<Dashboard> {
               child: Row(
                 children: [
                   Text(
-                    "Today",
+                    "Todo",
                     style: GoogleFonts.inter(
                       fontSize: textSize,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  Text("mop"),
+                  const Text("list"),
                 ],
               ),
             ),
@@ -44,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
@@ -60,43 +60,7 @@ class _DashboardState extends State<Dashboard> {
             Icons.add,
             color: blue,
           )),
-      bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
-          height: 35,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: IconButton(
-                  icon: const Icon(Icons.list),
-                  color: Colors.black,
-                  tooltip: MaterialLocalizations.of(context)
-                      .closeButtonTooltip,
-                  onPressed: () {
-                    Navigator.maybePop(context);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: IconButton(
-                  icon: const Icon(Icons.playlist_add_check),
-                  color: Colors.black,
-                  tooltip: MaterialLocalizations.of(context)
-                      .closeButtonTooltip,
-                  onPressed: () {
-                    Navigator.maybePop(context);
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-        color: gray,
-        shape: const CircularNotchedRectangle(),
-      ),
+
     );
   }
 

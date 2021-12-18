@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
+import 'package:todo/const/colors.dart';
 import 'package:todo/models/todo.dart';
 
 class Todos extends ChangeNotifier {
    final List<Todo> _items = [
-     Todo("1", "title1", false),
-     Todo("2", "title2", false),
-     Todo("3", "title3", false),
-     Todo("4", "title4", false),
+     // Todo("1", "title1", false, null),
+     // Todo("2", "title2", false, red),
+     // Todo("3", "title3", false, null),
+     // Todo("4", "title4", false, null),
    ];
 
    final List<Todo> _completedItems = [];

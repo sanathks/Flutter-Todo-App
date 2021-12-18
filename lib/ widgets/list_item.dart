@@ -57,8 +57,8 @@ class ListItem extends StatelessWidget {
             Container(
               height: 10,
               width: 10,
-              decoration: const BoxDecoration(
-                  color: green, shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: item.label, shape: BoxShape.circle),
             )
           ],
         ),
