@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/models/todos.dart';
+import 'package:todo/models/note_repository.dart';
 import 'package:todo/screens/dashboard.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => Todos(),
+      create: (context) => NoteRepository(),
       child: const TodoApp(),
     ),
   );
