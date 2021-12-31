@@ -1,8 +1,5 @@
 import 'dart:convert';
 import 'dart:ui';
-import 'dart:developer';
-
-import 'package:todo/const/colors.dart';
 
 class Note {
   late String id;
@@ -11,7 +8,6 @@ class Note {
   late List<dynamic> note;
   late DateTime createdAt;
   late Color label;
-
   Note(this.id, this.title, this.summary, this.note, this.createdAt, this.label);
 
   Map<String, dynamic> toMap() {
@@ -23,7 +19,6 @@ class Note {
       'label': label.toString().split('(0x')[1].split(')')[0]
     };
   }
-
   static Note fromJson(Map<String, dynamic> note) {
     int value = int.parse(note['label'], radix: 16);
     return  Note(
@@ -35,6 +30,4 @@ class Note {
       Color(value),
     );
   }
-
-
 }
